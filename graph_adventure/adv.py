@@ -152,14 +152,15 @@ print(f'path: {traversalPath}')
 print(f'path length: {len(traversalPath)}')
 
 
-"""
+
 # TRAVERSAL TEST
 visited_rooms = set()
-player.currentRoom = world.startingRoom
-visited_rooms.add(player.currentRoom)
+# player.currentRoom = world.startingRoom
+# visited_rooms.add(player.currentRoom)
 for move in traversalPath:
-    player.travel(move)
-    visited_rooms.add(player.currentRoom)
+    # player.travel(move)
+    visited_rooms.add(move)
+
 
 if len(visited_rooms) == len(roomGraph):
     print(
@@ -180,4 +181,4 @@ else:
 #     else:
 #         print("I did not understand that command.")
 
-"""
+
