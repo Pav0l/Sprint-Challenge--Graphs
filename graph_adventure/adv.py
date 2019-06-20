@@ -47,14 +47,37 @@ def dft(player):
             # to see if you add any new room into it
             stack_before = len(s.stack)
 
+            """
+            # This part optimizes the order of rooms
+            # in which they are added to the Stack
+            # it will check the number of rooms after neighbouring rooms
+            # and adds the one with least amount of rooms (possible dead end)
+            # as first to be processed in the stack (last in stack)
+            # this will prevent long paths back
+            # and make sure dead ends rooms are delt with first
+            """
+            obj = {'n': None, 'w': None, 's': None, 'e': None}
+
             # direction == one of 'n', 'w', 's', 'e'
             for direction in current_room.getExits():
                 # get room in direction
                 room = current_room.getRoomInDirection(direction)
+                obj[direction] = room
 
+            # make the obj with rooms a list of tuples
+            # for directions that do have a room (value of direction is not None)
+            obj_no_none = [i for i in obj.items() if i[1] != None]
+
+            # sort the list based on length of exits from the room
+            # the room with least amount of exits (1) will be added to stack last
+            # and visited first
+            sorted_obj = sorted(
+                obj_no_none, key=lambda room: len(room[1].getExits()), reverse=True)
+
+            for room in sorted_obj:
                 # do not add already visited rooms into stack
-                if room.id not in visited:
-                    s.push(room)
+                if room[1].id not in visited:
+                    s.push(room[1])
 
             stack_after = len(s.stack)
 
