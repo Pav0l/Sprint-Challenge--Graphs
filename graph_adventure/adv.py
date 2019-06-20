@@ -94,13 +94,13 @@ def dft(player):
                     if current_room.id == s.stack[-1].id:
                         # TARGET = s.stack[-2].id
                         shortest_path = bfs(
-                            current_room, s.stack[-2], s.stack)
+                            current_room, s.stack[-2])
                         # print(f'path from BFS: {shortest_path}')
 
                     else:
                         # TARGET = s.stack[-1].id
                         shortest_path = bfs(
-                            current_room, s.stack[-1], s.stack)
+                            current_room, s.stack[-1])
                         # print(f'path from BFS: {shortest_path}')
 
                     # append paths traversed with BFS to visited list
@@ -113,7 +113,7 @@ def dft(player):
     return visited
 
 
-def bfs(start, target, dft_stack):
+def bfs(start, target):
     que = Queue()
     que.enqueue({"node": start, "path": []})
     bfs_visited = set()
